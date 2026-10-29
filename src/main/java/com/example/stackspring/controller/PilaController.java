@@ -6,29 +6,34 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Stack;
 
 @RestController
 @RequestMapping("/pila")
 public class PilaController {
+    Stack<Character> letras = new Stack<>();
 
     @PostMapping
-    public String agregar(@RequestParam String valor) {
+    public Character meter(@RequestParam Character valor) {
 
-        return "Se agrego: " + valor;
+        return letras.push(valor);
     }
 
     @GetMapping("/pop")
-    public String sacar() {
+    public Character quitar() {
 
-        return "La pila esta vacia";
+        return letras.pop();
+    }
+
+    @GetMapping("/peek")
+    public Character verUltimo() {
+
+        return letras.peek();
     }
 
     @GetMapping
-    public List<String> verPila() {
+    public Stack<Character> mostrar() {
 
-        return new ArrayList<>();
+        return letras;
     }
 }
